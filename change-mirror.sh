@@ -21,12 +21,12 @@ fi
 
 if [ $PKG = "apk" ]; then
   sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
-elif [ $PKG = "yum" && $OS = "centos" ]; then
+elif [ $PKG = "yum" -a $OS = "centos" ]; then
   sed -e 's|^mirrorlist=|#mirrorlist=|g' \
          -e 's|^#baseurl=http://mirror.centos.org|baseurl=https://mirrors.tuna.tsinghua.edu.cn|g' \
          -i.bak \
          /etc/yum.repos.d/CentOS-*.repo
-elif [ $PKG = "apt" && $OS = "ubuntu" ]; then
+elif [ $PKG = "apt" -a $OS = "ubuntu" ]; then
   sed -i "s/mirrors.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/" /etc/apt/sources.list
   sed -i "s/security.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/" /etc/apt/sources.list
 elif [ $PKG = "apt" ]; then
