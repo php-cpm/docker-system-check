@@ -19,7 +19,10 @@ elif [ $is_apk = 1 ]; then
   PKG="apk"
 fi
 
+echo "using "$PKG" in "$OS
+
 if [ $PKG = "apk" ]; then
+
   sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
 elif [ $PKG = "yum" -a $OS = "centos" ]; then
   sed -e 's|^mirrorlist=|#mirrorlist=|g' \
@@ -32,4 +35,6 @@ elif [ $PKG = "apt" -a $OS = "ubuntu" ]; then
 elif [ $PKG = "apt" ]; then
   sed -i 's/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list
   sed -i 's|security.debian.org/debian-security|mirrors.tuna.tsinghua.edu.cn/debian-security|g' /etc/apt/sources.list
+else
+  echo "fail to find package manager"
 fi
